@@ -25,23 +25,25 @@ public class Deemo05_YanghuiTriangle02 {
     }
 
     private static int[][] getYanghuiTringle(int n) {
-        int[][] str = new int[n + 1][n + 1];
-        for (int i = 1; i <= n; i++) {
+        int[][] str = new int[n][n];
+        for (int i = 0; i < str.length; i++) {
+            str[i][0] = 1;
+            str[i][i] = 1;
+        }
+
+        for (int i = 1; i < str.length; i++) {
             for (int j = 1; j <= i; j++) {
-                if (i == 1 || i == j) {
-                    str[i][j] = 1;
-                } else {
-                    str[i][j] = str[i - 1][j - 1] + str[i - 1][j];
-                }
-            }System.out.println();
+                // 里面部分，等于当前位置的上方和左上角之和
+                str[i][j] = str[i - 1][j - 1] + str[i - 1][j];
+            }
         }
         return str;
     }
 
     private static void print(int[][] ary) {
-        for (int i = 1; i < ary.length; i++) {
-            for (int j = 1; j <= i; j++) {
-                System.out.print(ary[i][j] + " ");
+        for (int i = 0; i < ary.length; i++) {
+            for (int j = 0; j <= i; j++) {
+                System.out.printf(" %-3d", ary[i][j]);
             }
             System.out.println();
         }
